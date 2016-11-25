@@ -4,14 +4,14 @@ A simple promise library base on the [Promise A+](https://promisesaplus.com/).
 ## method
 
 * new Promise
-* x.then
-* x.catch
+* .then
+* .catch
 * Promise.resolve
 * Promise.reject
 
 ## Test 
 
-Pass all tests in [https://github.com/promises-aplus/promises-tests](https://github.com/promises-aplus/promises-tests).
+Pass all tests in [promises-tests](https://github.com/promises-aplus/promises-tests).
 
     terminal log: 872 passing (19s)
 
@@ -23,4 +23,5 @@ Pass all tests in [https://github.com/promises-aplus/promises-tests](https://git
 ## Reference
 
 [剖析Promise内部结构](https://github.com/xieranmaya/blog/issues/3)
+
 [Promise/A+规范](https://segmentfault.com/a/1190000002452115)
