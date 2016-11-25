@@ -1,4 +1,3 @@
-
 try {
 	module.exports = Promise
 } catch (e) { }
@@ -158,4 +157,14 @@ function resolvePromise(promise2, x, resolve, reject) {
 	} else {
 		resolve(x)
 	}
+}
+
+// for test
+Promise.deferred = Promise.defer = function () {
+	var dfd = {}
+	dfd.promise = new Promise(function (resolve, reject) {
+		dfd.resolve = resolve
+		dfd.reject = reject
+	})
+	return dfd
 }
