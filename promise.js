@@ -1,6 +1,6 @@
 try {
 	module.exports = Promise
-} catch (e) { }
+} catch (e) {}
 
 var toString = Object.prototype.toString
 var isFunction = function isFunction(obj) {
@@ -25,16 +25,20 @@ function Promise(fn) {
 	}
 }
 
-Promise.prototype.then = function (onResolved, onRejected) {
+Promise.prototype.then = function(onResolved, onRejected) {
 	var _this = this,
 		promise2
 
-	onResolved = isFunction(onResolved) ? onResolved : function (value) { return value }
-	onRejected = isFunction(onRejected) ? onRejected : function (reason) { throw reason }
+	onResolved = isFunction(onResolved) ? onResolved : function(value) {
+		return value
+	}
+	onRejected = isFunction(onRejected) ? onRejected : function(reason) {
+		throw reason
+	}
 
-	return promise2 = new Promise(function (resolve, reject) {
+	return promise2 = new Promise(function(resolve, reject) {
 		if (_this.status === 'pending') {
-			_this.onResolvedCallback.push(function (value) {
+			_this.onResolvedCallback.push(function(value) {
 				try {
 					var x = onResolved(value)
 					resolvePromise(promise2, x, resolve, reject)
@@ -43,7 +47,7 @@ Promise.prototype.then = function (onResolved, onRejected) {
 				}
 			})
 
-			_this.onRejectedCallback.push(function (reason) {
+			_this.onRejectedCallback.push(function(reason) {
 				try {
 					var x = onRejected(reason)
 					resolvePromise(promise2, x, resolve, reject)
@@ -52,7 +56,7 @@ Promise.prototype.then = function (onResolved, onRejected) {
 				}
 			})
 		} else {
-			setTimeout(function () {
+			setTimeout(function() {
 				var x
 				try {
 					if (_this.status === 'resolved') {
@@ -69,18 +73,18 @@ Promise.prototype.then = function (onResolved, onRejected) {
 	})
 }
 
-Promise.prototype.catch = function (onRejected) {
+Promise.prototype.catch = function(onRejected) {
 	return this.then(null, onRejected)
 }
 
-Promise.resolve = function (value) {
-	return new Promise(function (resolve, reject) {
+Promise.resolve = function(value) {
+	return new Promise(function(resolve, reject) {
 		resolve(value)
 	})
 }
 
-Promise.reject = function (reason) {
-	return new Promise(function (resolve, reject) {
+Promise.reject = function(reason) {
+	return new Promise(function(resolve, reject) {
 		reject(reason)
 	})
 }
@@ -90,11 +94,11 @@ function _resolve(value) {
 		return value.then(_resolve.bind(this), _reject.bind(this))
 	}
 	var _this = this
-	setTimeout(function () {
+	setTimeout(function() {
 		if (_this.status === 'pending') {
 			_this.status = 'resolved'
 			_this.value = value
-			_this.onResolvedCallback.forEach(function (fn) {
+			_this.onResolvedCallback.forEach(function(fn) {
 				fn(value)
 			})
 		}
@@ -103,11 +107,11 @@ function _resolve(value) {
 
 function _reject(reason) {
 	var _this = this
-	setTimeout(function () {
+	setTimeout(function() {
 		if (_this.status === 'pending') {
 			_this.status = 'rejected'
 			_this.value = reason
-			_this.onRejectedCallback.forEach(function (fn) {
+			_this.onRejectedCallback.forEach(function(fn) {
 				fn(reason)
 			})
 		}
@@ -124,7 +128,7 @@ function resolvePromise(promise2, x, resolve, reject) {
 
 	if (x instanceof Promise) {
 		if (x.status === 'pending') {
-			x.then(function (value) {
+			x.then(function(value) {
 				resolvePromise(promise2, value, resolve, reject)
 			}, reject)
 		} else {
@@ -137,11 +141,11 @@ function resolvePromise(promise2, x, resolve, reject) {
 		try {
 			then = x.then
 			if (isFunction(then)) {
-				then.call(x, function (y) {
+				then.call(x, function(y) {
 					if (thenIsCall) return
 					thenIsCall = true
 					return resolvePromise(promise2, y, resolve, reject)
-				}, function (reason) {
+				}, function(reason) {
 					if (thenIsCall) return
 					thenIsCall = true
 					return reject(reason)
@@ -160,9 +164,9 @@ function resolvePromise(promise2, x, resolve, reject) {
 }
 
 // for test
-Promise.deferred = Promise.defer = function () {
+Promise.deferred = Promise.defer = function() {
 	var dfd = {}
-	dfd.promise = new Promise(function (resolve, reject) {
+	dfd.promise = new Promise(function(resolve, reject) {
 		dfd.resolve = resolve
 		dfd.reject = reject
 	})
