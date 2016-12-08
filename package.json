@@ -1,0 +1,22 @@
+{
+  "name": "promise",
+  "version": "0.1.1",
+  "description": "A simple promise library base on the Promise A+.",
+  "main": "promise.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cirplan/promise.git"
+  },
+  "keywords": [
+    "promise"
+  ],
+  "author": "dcirplan@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cirplan/promise/issues"
+  },
+  "homepage": "https://github.com/cirplan/promise#readme"
+}
